@@ -1,0 +1,20 @@
+version: '2'
+services:
+    base-api:
+        container_name: ${APP_NAME}
+        build: ./docker
+        volumes: 
+          - ./src:/opt/src
+        expose: 
+          - "8000"
+        ports:
+          - "8000:8000"
+        command:
+          bash -c "composer install && php artisan serve --host=0.0.0.0 --port=8000"
+        networks: 
+          - inside
+networks: 
+  inside:
+    external: true
+    name: inside
+  
